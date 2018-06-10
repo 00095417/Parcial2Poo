@@ -16,9 +16,13 @@ import Heroica.Heroica;
 public class FactoryAlquimista implements AbstracFactoryRazas {
     
     private final Menu menuAlquimista = Menu.getInstance();
+    private Edificio edificioPrincipal;
     
     @Override
     public void getAlquimista() {
+        if (edificioPrincipal == null){
+            setEdificioPrincipal();
+        }
         menuAlquimista.mostrar();
     }
 
@@ -30,5 +34,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     @Override
     public Creacionista getCreacionista(String type) {
         return null;
-    }  
+    }
+    
+    public Edificio setEdificioPrincipal(){
+        return edificioPrincipal = new Edificio.EdificioBuilder("Abadia")
+                .recurso1("Mana", 10000)
+                .recurso2("Elixir", 5000)
+                .recurso3("Cobalto", 5000)
+                .vida(350)
+                .build();
+    }
+    
 }
