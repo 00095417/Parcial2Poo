@@ -13,7 +13,7 @@ public class RazaElegida implements Heroica{
 
     @Override
     public String heroica(String type) {
-        return "Soy un " + type;
+        return type;
     }
     
 }

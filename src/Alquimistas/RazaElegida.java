@@ -13,7 +13,7 @@ public class RazaElegida implements Alquimista {
 
     @Override
     public String alquimista(String type) {
-        return "Soy un " + type;
+        return type;
     }
 
     

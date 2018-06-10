@@ -13,7 +13,7 @@ public class RazaElegida implements Creacionista{
 
     @Override
     public String creacionista(String type) {
-        return "soy un " + type;        
+        return type;        
     }
     
 }

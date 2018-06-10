@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Player {
     
-    private String eleccion;
+    private String eleccion, razaE;
     private int fase;
     
     Scanner entrada = new Scanner(System.in);
@@ -27,20 +27,30 @@ public class Player {
     public int getFase() {
         return fase;
     }
+
+    public String getRazaE() {
+        return razaE;
+    }
+
+    public void setRazaE(String razaE) {
+        this.razaE = razaE;
+    }
     
     public void eleccionRaza(){
+        
+        System.out.println("Elija una raza:\n1. Alquimista\n2. Creacionista\n3. Heroica");
         
         this.eleccion = entrada.nextLine();
         
         switch(this.eleccion){
             case "1":
-                System.out.println(raza.getFactory(this.eleccion).getAlquimista("").alquimista("alquimista"));
+                setRazaE("Alquimista");
                 break;
             case "2":
-                System.out.println(raza.getFactory(this.eleccion).getCreacionista("").creacionista("creacionista"));
+                setRazaE("Creacionista");
                 break;
             case "3":
-                System.out.println(raza.getFactory(this.eleccion).getHeroica("").heroica("heroico"));
+                setRazaE("heroico");
                 break;
         }
     }
