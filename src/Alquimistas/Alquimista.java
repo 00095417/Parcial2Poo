@@ -11,6 +11,7 @@ package Alquimistas;
  */
 public interface Alquimista {
     
-    String alquimista(String type);
+    Edificio crearEdificio();
+    void usarEdificio();
         
 }

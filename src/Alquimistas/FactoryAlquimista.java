@@ -14,10 +14,12 @@ import Heroica.Heroica;
  * @author Carlos Ruiz
  */
 public class FactoryAlquimista implements AbstracFactoryRazas {
-
+    
+    private final Menu menuAlquimista = Menu.getInstance();
+    
     @Override
-    public Alquimista getAlquimista(String type) {
-        return new RazaElegida();
+    public void getAlquimista() {
+        menuAlquimista.mostrar();
     }
 
     @Override
@@ -28,8 +30,5 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     @Override
     public Creacionista getCreacionista(String type) {
         return null;
-    }
-    
-    
-    
+    }  
 }

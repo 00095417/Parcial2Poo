@@ -50,12 +50,24 @@ public class Player {
                 setRazaE("Creacionista");
                 break;
             case "3":
-                setRazaE("heroico");
+                setRazaE("Heroico");
                 break;
         }
     }
     
     public void jugar(){
-        System.out.println("Jugando...");
+        
+        switch(getRazaE()){
+            case "Alquimista":
+                raza.getFactory("1").getAlquimista();
+                break;
+            case "Creacionista":
+                System.out.println(getRazaE() + " menu");
+                break;
+            case "Heroico":
+                System.out.println(getRazaE() + " menu");
+                break;
+        
+        }
     }
 }

@@ -5,7 +5,6 @@
  */
 package Factory;
 
-import Alquimistas.Alquimista;
 import Creacionista.Creacionista;
 import Heroica.Heroica;
 
@@ -15,7 +14,7 @@ import Heroica.Heroica;
  */
 public interface AbstracFactoryRazas {
     
-    Alquimista getAlquimista(String type);
+    void getAlquimista();
     Heroica getHeroica(String type);
     Creacionista getCreacionista(String type);
     

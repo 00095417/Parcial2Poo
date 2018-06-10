@@ -19,28 +19,15 @@ public class CarlosRuizSWorld {
         
         int numFase = 0;
         Player player1 = new Player();
-        Player player2 = new Player();
         
         player1.setFase(0);
-        player2.setFase(0);
         
-        System.out.println("Player1");
         player1.eleccionRaza();
-        System.out.println("Player2");
-        player2.eleccionRaza();
-        
-        
-        while(player1.getFase()<=2&&player2.getFase()<=2){
             
-            System.out.println(player1.getRazaE());
-            player1.jugar();
-            System.out.println(player2.getRazaE());
-            player2.jugar();
+        player1.jugar();
             
-            player1.setFase(numFase+=1);
-            player2.setFase(numFase);
+        player1.setFase(numFase+=1);
             
-            System.out.println("------Fin fase " + numFase + "------");
-        }
+        System.out.println("------Fin fase " + numFase + "------");
     }   
 }

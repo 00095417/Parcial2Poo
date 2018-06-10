@@ -16,9 +16,7 @@ import Heroica.Heroica;
 public class FactoryCreacionista implements AbstracFactoryRazas{
 
     @Override
-    public Alquimista getAlquimista(String type) {
-        return null;
-    }
+    public void getAlquimista(){}
 
     @Override
     public Heroica getHeroica(String type) {

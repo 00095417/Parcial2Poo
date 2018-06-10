@@ -15,15 +15,19 @@ import Heroica.FactoryHeroica;
  */
 public class FactoryProducerRazas {
     
-    public static AbstracFactoryRazas getFactory(String type){
+    private FactoryAlquimista alquimista = new FactoryAlquimista();
+    private FactoryCreacionista creacionista = new FactoryCreacionista();
+    private FactoryHeroica heroico = new FactoryHeroica();
+    
+    public AbstracFactoryRazas getFactory(String type){
         
         switch(type){
             case "1":
-                return new FactoryAlquimista();
+                return alquimista;
             case "2":
-                return new FactoryCreacionista();
+                return creacionista;
             case "3":
-                return new FactoryHeroica();
+                return heroico;
             default:
                 return null;
         }
