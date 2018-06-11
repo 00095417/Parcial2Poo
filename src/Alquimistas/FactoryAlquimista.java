@@ -17,12 +17,9 @@ import java.util.ArrayList;
 public class FactoryAlquimista implements AbstracFactoryRazas {
     
     private final Menu menuAlquimista = Menu.getInstance();
-    private Edificio edificioPrincipal = new Edificio();
-    private Edificio edificioRecurso = new Edificio();
-    private Edificio edificioTropas = new Edificio();
-    private RecursoAlquimista recursoMana = new RecursoAlquimista("Mana", 2000);
-    private RecursoAlquimista recursoElixir = new RecursoAlquimista("Elixir", 1000);
-    private RecursoAlquimista recursoCobalto = new RecursoAlquimista("Cobalto", 1000);
+    private Edificio edificioPrincipal;
+    private Edificio edificioRecurso;
+    private Edificio edificioTropas;
     
     @Override
     public void getAlquimista() {
@@ -43,16 +40,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     }
     
     public Edificio setEdificioPrincipal(){
-        edificioPrincipal.setNombre("Abadia");
-        edificioPrincipal.setRecurso1(recursoMana);
-        edificioPrincipal.setRecurso2(recursoElixir);
-        edificioPrincipal.setRecurso3(recursoCobalto);
-        edificioPrincipal.setCapacidad_recurso1(10000);
-        edificioPrincipal.setCapacidad_recurso2(5000);
-        edificioPrincipal.setCapacidad_recurso3(5000);
-        edificioPrincipal.setNivel(1);
-        edificioPrincipal.setVida(350);
-        return edificioPrincipal;
+        
+        RecursoAlquimista recursoMana = new RecursoAlquimista("Mana", 2000);
+        RecursoAlquimista recursoElixir = new RecursoAlquimista("Elixir", 1000);
+        RecursoAlquimista recursoCobalto = new RecursoAlquimista("Cobalto", 1000);
+        
+        return edificioPrincipal = new Edificio.EdificioBuilder("Abadia")
+                .recurso1(recursoMana).recurso2(recursoElixir).recurso3(recursoCobalto)
+                .capacidad_recurso1(10000).capacidad_recurso2(5000).capacidad_recurso3(5000)
+                .vida(350).build();
     }
     
 }
