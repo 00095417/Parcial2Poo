@@ -9,14 +9,13 @@ package Alquimistas;
  *
  * @author Carlos Ruiz
  */
-public class RecursoAlquimista {
+public class RecursosAlquimistas {
     
     private String nombre;
     private int cantidad;
     
     
-    
-    public RecursoAlquimista(String nombre, int cantidad){
+    public RecursosAlquimistas(String nombre, int cantidad){
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
@@ -35,14 +34,5 @@ public class RecursoAlquimista {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-    
-    public void recolectar(){
-    
-    }
-    
-    public void generar(){
-    
-    }
-    
+    }    
 }

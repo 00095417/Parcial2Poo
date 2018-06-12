@@ -20,13 +20,26 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     private Edificio edificioPrincipal;
     private Edificio edificioRecurso;
     private Edificio edificioTropas;
+    private RecursosAlquimistas recursoMana = new RecursosAlquimistas("Mana", 2000);
+    private RecursosAlquimistas recursoElixir = new RecursosAlquimistas("Elixir", 1000);
+    private RecursosAlquimistas recursoCobalto = new RecursosAlquimistas("Cobalto", 1000);
     
     @Override
     public void getAlquimista() {
         if (edificioPrincipal == null){
             setEdificioPrincipal();
         }
-        menuAlquimista.mostrar();
+        
+        System.out.println(edificioPrincipal.getRecurso1().getNombre() + ": " + edificioPrincipal.getRecurso1().getCantidad());
+        System.out.println(edificioPrincipal.getRecurso2().getNombre() + ": " + edificioPrincipal.getRecurso2().getCantidad());
+        System.out.println(edificioPrincipal.getRecurso3().getNombre() + ": " + edificioPrincipal.getRecurso3().getCantidad());
+    
+        if (edificioRecurso == null){
+            setEdificioRecurso1();
+        }
+        
+        //edificioRecurso.EdificioBuilder
+        
     }
 
     @Override
@@ -41,14 +54,12 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     
     public Edificio setEdificioPrincipal(){
         
-        RecursoAlquimista recursoMana = new RecursoAlquimista("Mana", 2000);
-        RecursoAlquimista recursoElixir = new RecursoAlquimista("Elixir", 1000);
-        RecursoAlquimista recursoCobalto = new RecursoAlquimista("Cobalto", 1000);
+    return null;
+    }
+    
+    public Edificio setEdificioRecurso1(){
         
-        return edificioPrincipal = new Edificio.EdificioBuilder("Abadia")
-                .recurso1(recursoMana).recurso2(recursoElixir).recurso3(recursoCobalto)
-                .capacidad_recurso1(10000).capacidad_recurso2(5000).capacidad_recurso3(5000)
-                .vida(350).build();
+    return null;    
     }
     
 }
