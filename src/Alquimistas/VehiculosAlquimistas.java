@@ -14,7 +14,7 @@ public class VehiculosAlquimistas {
     private String nombreVehiculo;
     private int vida, ataque, costoR1, costoR2, costoR3;
 
-    public VehiculosAlquimistas(String nombreVehiculo, int vida, int ataque, 
+    public void VehiculosAlquimistas(String nombreVehiculo, int vida, int ataque, 
                                 int costoR1, int costoR2, int costoR3) {
         this.nombreVehiculo = nombreVehiculo;
         this.vida = vida;

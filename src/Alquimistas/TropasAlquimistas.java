@@ -14,7 +14,7 @@ public class TropasAlquimistas {
     private String nombreTropa;
     private int vida, daAtaque, daDefensa, costoR1, costoR2, costoR3;
 
-    public TropasAlquimistas(String nombreTropa, int vida, int daAtaque, 
+    public void TropasAlquimistas(String nombreTropa, int vida, int daAtaque, 
                              int daDefensa,int costoR1, int costoR2, int costoR3) {
         this.nombreTropa = nombreTropa;
         this.vida = vida;

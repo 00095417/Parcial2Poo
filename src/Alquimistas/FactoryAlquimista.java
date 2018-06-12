@@ -19,10 +19,13 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     private final Menu menuAlquimista = Menu.getInstance();
     private Edificio edificioPrincipal;
     private Edificio edificioRecurso = new Edificio();
-    private Edificio edificioTropas;
+    private Edificio edificioTropas = new Edificio();
+    private Edificio edificioVehiculo = new Edificio();
     private RecursosAlquimistas recursoMana = new RecursosAlquimistas("Mana", 2000);
     private RecursosAlquimistas recursoElixir = new RecursosAlquimistas("Elixir", 1000);
     private RecursosAlquimistas recursoCobalto = new RecursosAlquimistas("Cobalto", 1000);
+    private ArrayList<Edificio> listaEdificioRecurso = new ArrayList<>();
+    private ArrayList<Edificio> listaEdificioTropas = new ArrayList<>();
     
     @Override
     public void getAlquimista() {
@@ -100,6 +103,40 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                 edificioRecurso.EdificioR("Recolector de Cobalto", recursoCobalto, 1000, 50, 50, 0, 500, 3, 100);
                 recursoCobalto.setCantidad(rAux);
                 break;                      
+        }
+    }
+    //Creando las Guarniciones que crearan las tropas
+    public void setEdificoTropa(String guarnicio){
+        
+        TropasAlquimistas tropa = new TropasAlquimistas();
+        
+        switch(guarnicio){
+            case "gremio":
+                tropa.TropasAlquimistas("Gremio", 100, 35, 25, 10, 10, 5);
+                edificioTropas.EdificioT("Guarnicio de Gremios", tropa, 150, 75, 75, 75, 2);
+                break;
+            case "magos":
+                tropa.TropasAlquimistas("Magos", 10, 7, 6, 5, 5, 0);
+                edificioTropas.EdificioT("Guarnicio de Magos", tropa, 100, 50, 50, 50, 5);
+                break;
+            case "especial":
+                tropa.TropasAlquimistas("Chaman", 100, 50, 50, 50, 50, 1);
+        }
+    }
+    //Creando los Talleres que crearan los vehiculos
+    public void setEdificioVehiculo(String taller){
+    
+        VehiculosAlquimistas vehiculo = new VehiculosAlquimistas();
+        
+        switch (taller){
+            case "aerodeslizador":
+                vehiculo.VehiculosAlquimistas("Aerodeslizador", 100, 30, 0, 25, 25);
+                edificioVehiculo.EdificioV("Taller de Aerodeslizadores", vehiculo, 100, 100, 100, 100, 1);
+                break;
+            case "espejo de fuego":
+                vehiculo.VehiculosAlquimistas("Espejo de Fuego", 100, 30, 0, 25, 25);
+                edificioVehiculo.EdificioV("Taller de Espejos de Fuego", vehiculo, 100, 100, 100, 100, 1);
+                break;
         }
     }
 }
