@@ -20,7 +20,7 @@ public class Edificio {
                 capacidad_recurso1, capacidad_recurso2, 
                 capacidad_recurso3, tiempo_espera, produccion, nivel;
 
-    public Edificio(String nombre, RecursosAlquimistas recurso1, RecursosAlquimistas recurso2,
+    public void  EdificioP(String nombre, RecursosAlquimistas recurso1, RecursosAlquimistas recurso2,
                     RecursosAlquimistas recurso3, int vida, int costo1, int costo2, int costo3, 
                     int capacidad_recurso1, int capacidad_recurso2, int capacidad_recurso3, int nivel) {
         this.nombre = nombre;
@@ -37,7 +37,7 @@ public class Edificio {
         this.nivel = nivel;
     }
 
-    public Edificio(String nombre, RecursosAlquimistas recurso, int vida, int costo1, int costo2, int costo3,
+    public void EdificioR(String nombre, RecursosAlquimistas recurso, int vida, int costo1, int costo2, int costo3,
                     int capacidad_recurso, int tiempo_espera, int produccion) {
         this.nombre = nombre;
         this.vida = vida;
@@ -63,7 +63,7 @@ public class Edificio {
         }
     }
 
-    public Edificio(String nombre, TropasAlquimistas tropa, int vida, 
+    public void EdificioT(String nombre, TropasAlquimistas tropa, int vida, 
                     int costo1, int costo2, int costo3, int produccion) {
         this.nombre = nombre;
         this.vida = vida;
@@ -82,7 +82,7 @@ public class Edificio {
         }
     }
     
-    public Edificio(String nombre, VehiculosAlquimistas vehiculo, int vida, 
+    public void EdificioV(String nombre, VehiculosAlquimistas vehiculo, int vida, 
                     int costo1, int costo2, int costo3, int produccion) {
         this.nombre = nombre;
         this.vida = vida;
