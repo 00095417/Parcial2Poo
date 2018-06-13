@@ -9,6 +9,7 @@ import Creacionista.Creacionista;
 import Factory.AbstracFactoryRazas;
 import Heroica.Heroica;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -25,7 +26,9 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     private RecursosAlquimistas recursoElixir = new RecursosAlquimistas("Elixir", 1000);
     private RecursosAlquimistas recursoCobalto = new RecursosAlquimistas("Cobalto", 1000);
     private ArrayList<Edificio> listaEdificioRecurso = new ArrayList<>();
-    private ArrayList<Edificio> listaEdificioTropas = new ArrayList<>();
+    private ArrayList<Edificio> listaEdificioGuarnicion = new ArrayList<>();
+    private ArrayList<Edificio> listaEdificioTalleres = new ArrayList<>();
+    Scanner entrada = new Scanner(System.in);
     
     @Override
     public void getAlquimista() {
@@ -33,30 +36,58 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             setEdificioPrincipal();
         }
         
-        System.out.println("Recurso actual......");
-        System.out.println(edificioPrincipal.getRecurso1().getNombre() + ": " + edificioPrincipal.getRecurso1().getCantidad());
-        System.out.println(edificioPrincipal.getRecurso2().getNombre() + ": " + edificioPrincipal.getRecurso2().getCantidad());
-        System.out.println(edificioPrincipal.getRecurso3().getNombre() + ": " + edificioPrincipal.getRecurso3().getCantidad());
-  
-        setEdificioRecurso("mana");
+        mostrarRaza();
+        menuAlquimista.menuPrincipal();
         
-        System.out.println("--------");
-        System.out.println(edificioRecurso.getNombre());
-        System.out.println("----------");
+        switch(entrada.nextLine()){
         
-        if (edificioPrincipal.getRecurso2().getCantidad()>edificioRecurso.getCosto2()&&
-            edificioPrincipal.getRecurso3().getCantidad()>edificioRecurso.getCosto3()){
-            edificioPrincipal.getRecurso2().setCantidad(edificioPrincipal.getRecurso2().getCantidad()-edificioRecurso.getCosto2());
-            edificioPrincipal.getRecurso3().setCantidad(edificioPrincipal.getRecurso3().getCantidad()-edificioRecurso.getCosto3());
+            case "1":
+                switch (menuAlquimista.menuEdificios()){
+                    case "Generador de Mana":
+                        setEdificioRecurso("mana");
+                        if (edificioPrincipal.getRecurso2().getCantidad()>edificioRecurso.getCosto2()&&
+                            edificioPrincipal.getRecurso3().getCantidad()>edificioRecurso.getCosto3()){
+                            edificioPrincipal.getRecurso2().setCantidad(edificioPrincipal.getRecurso2().getCantidad()-edificioRecurso.getCosto2());
+                            edificioPrincipal.getRecurso3().setCantidad(edificioPrincipal.getRecurso3().getCantidad()-edificioRecurso.getCosto3());
+                            listaEdificioRecurso.add(edificioRecurso);
+                        }
+                        else{
+                            System.out.println("Recurso Insuficiente");
+                        }
+                        break;
+                    case "Recolector de Elixir":
+                        setEdificioRecurso("elixir");
+                        if (edificioPrincipal.getRecurso1().getCantidad()>edificioRecurso.getCosto1()&&
+                            edificioPrincipal.getRecurso3().getCantidad()>edificioRecurso.getCosto3()){
+                            edificioPrincipal.getRecurso1().setCantidad(edificioPrincipal.getRecurso1().getCantidad()-edificioRecurso.getCosto1());
+                            edificioPrincipal.getRecurso3().setCantidad(edificioPrincipal.getRecurso3().getCantidad()-edificioRecurso.getCosto3());
+                            listaEdificioRecurso.add(edificioRecurso);
+                        }
+                        else{
+                            System.out.println("Recurso Insuficiente");
+                        }
+                        break;
+                    case "Recolector de Cobalto":
+                        setEdificioRecurso("cobalto");
+                        if (edificioPrincipal.getRecurso1().getCantidad()>edificioRecurso.getCosto1()&&
+                            edificioPrincipal.getRecurso2().getCantidad()>edificioRecurso.getCosto2()){
+                            edificioPrincipal.getRecurso1().setCantidad(edificioPrincipal.getRecurso1().getCantidad()-edificioRecurso.getCosto1());
+                            edificioPrincipal.getRecurso2().setCantidad(edificioPrincipal.getRecurso2().getCantidad()-edificioRecurso.getCosto2());
+                            listaEdificioRecurso.add(edificioRecurso);
+                        }
+                        else{
+                            System.out.println("Recurso Insuficiente");
+                        }
+                        break;
+                }
+                break;
+            case "2":
+                menuAlquimista.menuTropas();
+                
+                break;
+        
         }
-        else{
-            System.out.println("Recurso Insuficiente");
-        }
-        
-        System.out.println("Recurso actual......");
-        System.out.println(edificioPrincipal.getRecurso1().getNombre() + ": " + edificioPrincipal.getRecurso1().getCantidad());
-        System.out.println(edificioPrincipal.getRecurso2().getNombre() + ": " + edificioPrincipal.getRecurso2().getCantidad());
-        System.out.println(edificioPrincipal.getRecurso3().getNombre() + ": " + edificioPrincipal.getRecurso3().getCantidad());
+        mostrarRaza();
         
     }
 
@@ -87,6 +118,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                 rAux = recursoMana.getCantidad();
                 recursoMana.setCantidad(0);
                 edificioRecurso.EdificioR("Generador de Mana", recursoMana, 1000, 0, 50, 50, 500, 3, 100);
+                System.out.println(recursoMana.getCantidad());
                 recursoMana.setCantidad(rAux);
                 break;
                 
@@ -139,4 +171,49 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                 break;
         }
     }
+    //Mostrando los elementos que posee la raza alquimista
+    public void mostrarRaza(){
+    
+        System.out.println("------Raza Alquimista------");
+        System.out.println("---------Recursos----------");
+        System.out.println(edificioPrincipal.getRecurso1().getNombre() + ": " + edificioPrincipal.getRecurso1().getCantidad());
+        System.out.println(edificioPrincipal.getRecurso2().getNombre() + ": " + edificioPrincipal.getRecurso2().getCantidad());
+        System.out.println(edificioPrincipal.getRecurso3().getNombre() + ": " + edificioPrincipal.getRecurso3().getCantidad());
+        System.out.println("---------Edificios---------");
+        if (listaEdificioRecurso.isEmpty()){
+            System.out.println("No hay edificios que generen recursos");
+        }
+        else{
+            for (Edificio edificioR: listaEdificioRecurso){
+                if("Generador de Mana".equals(edificioR.getNombre())){
+                    System.out.println(edificioR.getNombre() + ":" + edificioR.getRecurso1().getCantidad());
+                }
+                if("Recolector de Elixir".equals(edificioR.getNombre())){
+                    System.out.println(edificioR.getNombre() + ":" + edificioR.getRecurso2().getCantidad());
+                }
+                if("Recolector de Cobalto".equals(edificioR.getNombre())){
+                    System.out.println(edificioR.getNombre() + ":" + edificioR.getRecurso3().getCantidad());
+                }   
+            }
+        }
+        if (listaEdificioGuarnicion.isEmpty()){
+            System.out.println("No hay guarniciones");
+        }
+        else{
+            for (Edificio edificioR: listaEdificioRecurso){
+                System.out.println(edificioR.getNombre());
+            }
+        }
+        if (listaEdificioTalleres.isEmpty()){
+            System.out.println("No hay talleres");
+        }
+        else{
+            for (Edificio edificioR: listaEdificioRecurso){
+                System.out.println(edificioR.getNombre());
+            }
+        }
+        System.out.println("---------Tropas------------");
+    
+    }
+      
 }
