@@ -12,16 +12,17 @@ package Alquimistas;
 public class VehiculosAlquimistas {
     
     private String nombreVehiculo;
-    private int vida, ataque, costoR1, costoR2, costoR3;
+    private int vida, ataque, costoR1, costoR2, costoR3, cantidad;
 
     public void VehiculosAlquimistas(String nombreVehiculo, int vida, int ataque, 
-                                int costoR1, int costoR2, int costoR3) {
+                                int costoR1, int costoR2, int costoR3, int cantidad) {
         this.nombreVehiculo = nombreVehiculo;
         this.vida = vida;
         this.ataque = ataque;
         this.costoR1 = costoR1;
         this.costoR2 = costoR2;
         this.costoR3 = costoR3;
+        this.cantidad = cantidad;
     }
 
     public String getNombreVehiculo() {
@@ -70,5 +71,14 @@ public class VehiculosAlquimistas {
 
     public void setCostoR3(int costoR3) {
         this.costoR3 = costoR3;
-    }    
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+    
 }

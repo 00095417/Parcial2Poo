@@ -85,6 +85,7 @@ public class Menu {
         System.out.println("1. Crear Gremio");
         System.out.println("2. Crear Magos");
         System.out.println("3. Crear Especial");
+        System.out.println("4. Volver");
         System.out.println("------------------");
         
         switch (entrada.nextLine()){
@@ -99,6 +100,24 @@ public class Menu {
                 return null;
         
         }
+    }
+    
+    public String menuVehiculos(){
+        
+        System.out.println("---Vehiculos a Crear---");
+        System.out.println("Ingrese una opcion");
+        System.out.println("1. Crear Aerodeslizador");
+        System.out.println("2. Crear Espejo de Fuego");
+        System.out.println("-----------------------");
+        
+        switch (entrada.nextLine()){
+            case "1":
+                return "Aerodeslizador";
+            case "2":
+                return "Espejo de Fuego";
+            default:
+                return null;
+        } 
     }
     
 }

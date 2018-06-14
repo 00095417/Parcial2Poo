@@ -36,7 +36,6 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         mostrarRaza();
         menuAlquimista.menuPrincipal();
         menus();
-        mostrarRaza();
         
     }
 
@@ -104,11 +103,11 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         switch (taller)
         {
             case "aerodeslizador":
-                vehiculo.VehiculosAlquimistas("Aerodeslizador", 100, 30, 0, 25, 25);
+                vehiculo.VehiculosAlquimistas("Aerodeslizador", 100, 30, 0, 25, 25,0);
                 edificioVehiculo.EdificioV("Taller de Aerodeslizadores", vehiculo, 100, 100, 100, 100, 1);
                 break;
             case "espejo de fuego":
-                vehiculo.VehiculosAlquimistas("Espejo de Fuego", 100, 30, 0, 25, 25);
+                vehiculo.VehiculosAlquimistas("Espejo de Fuego", 100, 30, 0, 25, 25,0);
                 edificioVehiculo.EdificioV("Taller de Espejos de Fuego", vehiculo, 100, 100, 100, 100, 1);
                 break;
         }
@@ -162,8 +161,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             int pos = 0;
             for (Edificio edificioT: listaEdificioTalleres)
             {
-                pos += 1;
-                System.out.println(pos +". "+edificioT.getNombre());
+                System.out.println((pos += 1) +". "+edificioT.getNombre());
             }
         }
         System.out.println("---------Tropas------------");
@@ -323,36 +321,205 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                     case "Gremio":
                         if (listaEdificioGuarnicion.isEmpty())
                         {
-                        System.out.println("Cree una Guarnicion de Gremios primero para utilizar esta tropa.");
+                            System.out.println("No dispone de Guarniciones");
                         }
                         else{
                             System.out.println("Elija que guarnicion usar:");
                             int index = entrada.nextInt();
-                            TropasAlquimistas tropaAux = listaEdificioGuarnicion.get(index-1).getTropa();
-                            System.out.println("Cantidad a adiestrar (max 5):");
-                            int cantidad = entrada.nextInt();
-                            if (edificioPrincipal.getCantidadMana()>(tropaAux.getCostoR1()*cantidad)&&
-                                edificioPrincipal.getCantidadElixir()>(tropaAux.getCostoR2()*cantidad)&&
-                                edificioPrincipal.getCantidadCobalto()>(tropaAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=5)
+                            
+                            if ("Guarnicion de Gremios".equals(listaEdificioGuarnicion.get(index-1).getNombre())&&index>0)
                             {
-                                edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- tropaAux.getCostoR1()*cantidad);
-                                edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- tropaAux.getCostoR2()*cantidad);
-                                edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- tropaAux.getCostoR3()*cantidad);
+                                TropasAlquimistas tropaAux = listaEdificioGuarnicion.get(index-1).getTropa();
+                                System.out.println("Cantidad a adiestrar (max 5):");
+                                int cantidad = entrada.nextInt();
+                                if (edificioPrincipal.getCantidadMana()>(tropaAux.getCostoR1()*cantidad)&&
+                                    edificioPrincipal.getCantidadElixir()>(tropaAux.getCostoR2()*cantidad)&&
+                                    edificioPrincipal.getCantidadCobalto()>(tropaAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=5)
+                                {
+                                    edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- tropaAux.getCostoR1()*cantidad);
+                                    edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- tropaAux.getCostoR2()*cantidad);
+                                    edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- tropaAux.getCostoR3()*cantidad);
                                 
-                                listaEdificioGuarnicion.get(index-1).getTropa().setCantidad(cantidad);
+                                    listaEdificioGuarnicion.get(index-1).getTropa().setCantidad(cantidad);
+                                }
+                                else
+                                {
+                                    System.out.println("Opcion invalida");                            
+                                }
                             }
-                            else
+                            else{
+                                System.out.println("Error de Guarnicion");
+                            }
+                            
+                            
+                            break;
+                        }
+                    case "Magos":
+                        if (listaEdificioGuarnicion.isEmpty())
+                        {
+                        System.out.println("No dispone de Guarniciones");
+                        }
+                        else{
+                            System.out.println("Elija que guarnicion usar:");
+                            int index = entrada.nextInt();
+                            
+                            if ("Guarnicion de Magos".equals(listaEdificioGuarnicion.get(index-1).getNombre())&&index>0)
                             {
-                                System.out.println("Opcion invalida");                            
+                                TropasAlquimistas tropaAux = listaEdificioGuarnicion.get(index-1).getTropa();
+                                System.out.println("Cantidad a adiestrar (max 10):");
+                                int cantidad = entrada.nextInt();
+                                if (edificioPrincipal.getCantidadMana()>(tropaAux.getCostoR1()*cantidad)&&
+                                    edificioPrincipal.getCantidadElixir()>(tropaAux.getCostoR2()*cantidad)&&
+                                    edificioPrincipal.getCantidadCobalto()>(tropaAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=10)
+                                {
+                                    edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- tropaAux.getCostoR1()*cantidad);
+                                    edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- tropaAux.getCostoR2()*cantidad);
+                                    edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- tropaAux.getCostoR3()*cantidad);
+                                
+                                    listaEdificioGuarnicion.get(index-1).getTropa().setCantidad(cantidad);
+                                }
+                                else
+                                {
+                                    System.out.println("Opcion invalida");                            
+                                }
+                            }
+                            else{
+                                System.out.println("Error de guarnicion");
                             }
                             break;
                         }
-                
+                    case "Especial":
+                        if (listaEdificioGuarnicion.isEmpty())
+                        {
+                        System.out.println("No dispones de la Guarniciones");
+                        }
+                        else{
+                            System.out.println("Elija que guarnicion usar:");
+                            int index = entrada.nextInt();
+                            
+                            if ("Guarnicion Especial".equals(listaEdificioGuarnicion.get(index-1).getNombre())&&index>0)
+                            {
+                                TropasAlquimistas tropaAux = listaEdificioGuarnicion.get(index-1).getTropa();
+                                System.out.println("Cantidad a adiestrar (max 1):");
+                                int cantidad = entrada.nextInt();
+                                if (edificioPrincipal.getCantidadMana()>(tropaAux.getCostoR1()*cantidad)&&
+                                    edificioPrincipal.getCantidadElixir()>(tropaAux.getCostoR2()*cantidad)&&
+                                    edificioPrincipal.getCantidadCobalto()>(tropaAux.getCostoR3()*cantidad)&& cantidad==1)
+                                {
+                                    edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- tropaAux.getCostoR1()*cantidad);
+                                    edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- tropaAux.getCostoR2()*cantidad);
+                                    edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- tropaAux.getCostoR3()*cantidad);
+                                
+                                    listaEdificioGuarnicion.get(index-1).getTropa().setCantidad(cantidad);
+                                }
+                                else
+                                {
+                                    System.out.println("Opcion invalida");                            
+                                }
+                            }
+                            else{
+                                System.out.println("No dispone de la Guarnicion Especial");
+                            }
+                            break;
+                        }  
+                    default:
+                        menuAlquimista.menuPrincipal();
+                        menus();
+                        break; 
                 }
                 break;
-        
+            case "3":
+                switch(menuAlquimista.menuVehiculos()){
+                    case "Aerodeslizador":
+                        if (listaEdificioTalleres.isEmpty())
+                        {
+                        System.out.println("No dispone de Talleres");
+                        }
+                        else{
+                            System.out.println("Elija que taller usar:");
+                            int index = entrada.nextInt();
+                            
+                            if ("Taller de Aerodeslizador".equals(listaEdificioTalleres.get(index-1).getNombre())&&index>0)
+                            {
+                                VehiculosAlquimistas vehiculoAux = listaEdificioTalleres.get(index-1).getVehiculo();
+                                System.out.println("Cantidad a adiestrar (max 5):");
+                                int cantidad = entrada.nextInt();
+                                if (edificioPrincipal.getCantidadMana()>(vehiculoAux.getCostoR1()*cantidad)&&
+                                    edificioPrincipal.getCantidadElixir()>(vehiculoAux.getCostoR2()*cantidad)&&
+                                    edificioPrincipal.getCantidadCobalto()>(vehiculoAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=5)
+                                {
+                                    edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- vehiculoAux.getCostoR1()*cantidad);
+                                    edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- vehiculoAux.getCostoR2()*cantidad);
+                                    edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- vehiculoAux.getCostoR3()*cantidad);
+                                
+                                    listaEdificioTalleres.get(index-1).getVehiculo().setCantidad(cantidad);
+                                }
+                                else
+                                {
+                                    System.out.println("Opcion invalida");                            
+                                }
+                            }
+                            else 
+                            {
+                                System.out.println("Error de Taller");
+                            }
+                            break;
+                        }
+                    case "Espejo de Fuego":
+                        if (listaEdificioTalleres.isEmpty())
+                        {
+                        System.out.println("No dispone de un Taller");
+                        }
+                        else{
+                            System.out.println("Elija que taller usar:");
+                            int index = entrada.nextInt();
+                            
+                            if ("Taller de Aerodeslizador".equals(listaEdificioTalleres.get(index-1).getNombre())&&index>0)
+                            {
+                                VehiculosAlquimistas vehiculoAux = listaEdificioTalleres.get(index-1).getVehiculo();
+                                System.out.println("Cantidad a adiestrar (max 5):");
+                                int cantidad = entrada.nextInt();
+                                if (edificioPrincipal.getCantidadMana()>(vehiculoAux.getCostoR1()*cantidad)&&
+                                    edificioPrincipal.getCantidadElixir()>(vehiculoAux.getCostoR2()*cantidad)&&
+                                    edificioPrincipal.getCantidadCobalto()>(vehiculoAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=5)
+                                {
+                                    edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- vehiculoAux.getCostoR1()*cantidad);
+                                    edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- vehiculoAux.getCostoR2()*cantidad);
+                                    edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- vehiculoAux.getCostoR3()*cantidad);
+                                
+                                    listaEdificioTalleres.get(index-1).getVehiculo().setCantidad(cantidad);
+                                }
+                                else
+                                {
+                                    System.out.println("No hay suficientes recursos o cantidad invalida");                            
+                                }
+                            }
+                            else
+                            {
+                                System.out.println("Error de Taller");
+                            }
+                            break;
+                        }
+                }
+            case "6":
+                if (listaEdificioRecurso.isEmpty()){
+                    System.out.println("No dispone de Edificios que te generen o produscan algun recurso");
+                }
+                else
+                {
+                    for (Edificio recolectar:listaEdificioRecurso){
+                        if ("Generador de Mana".equals(recolectar.getNombre())){
+                            edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()+recolectar.getCantidadMana());
+                        }
+                        if ("Recolector de Elixir".equals(recolectar.getNombre())){
+                            edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadElixir()+recolectar.getCantidadElixir());
+                        }
+                        if ("Recolector de Cobalto".equals(recolectar.getNombre())){
+                            edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()+recolectar.getCantidadCobalto());
+                        }
+                    }
+                }
+                break;
         }
-        
-        getAlquimista();
     }
 }
