@@ -12,22 +12,24 @@ package Alquimistas;
  */
 public class Edificio {
     
-    private String nombre;
-    private RecursosAlquimistas recurso1, recurso2,recurso3;
+    private String nombre, mana,elixir,cobalto;
     private TropasAlquimistas tropa1, tropa2;
     private VehiculosAlquimistas vehiculo1, vehiculo2;
-    private int vida, costo1, costo2, costo3, 
-                capacidad_recurso1, capacidad_recurso2, 
-                capacidad_recurso3, tiempo_espera, produccion, nivel;
+    private int vida, cantidadMana, cantidadElixir, cantidadCobalto, costo1, costo2, costo3, 
+                capacidad_recurso1, capacidad_recurso2,capacidad_recurso3, tiempo_espera, produccion, nivel;
 
-    public void  EdificioP(String nombre, RecursosAlquimistas recurso1, RecursosAlquimistas recurso2,
-                    RecursosAlquimistas recurso3, int vida, int costo1, int costo2, int costo3, 
-                    int capacidad_recurso1, int capacidad_recurso2, int capacidad_recurso3, int nivel) {
+    public void  EdificioP(String nombre, String mana, String elixir, String cobalto, int vida,
+                            int cantidadMana, int cantidadElixir, int cantidadCobalto, 
+                            int costo1, int costo2, int costo3, int capacidad_recurso1,
+                            int capacidad_recurso2, int capacidad_recurso3, int nivel) {
         this.nombre = nombre;
-        this.recurso1 = recurso1;
-        this.recurso2 = recurso2;
-        this.recurso3 = recurso3;
+        this.mana = mana;
+        this.elixir = elixir;
+        this.cobalto = cobalto;
         this.vida = vida;
+        this.cantidadMana = cantidadMana;
+        this.cantidadElixir = cantidadElixir;
+        this.cantidadCobalto = cantidadCobalto;
         this.costo1 = costo1;
         this.costo2 = costo2;
         this.costo3 = costo3;
@@ -37,7 +39,7 @@ public class Edificio {
         this.nivel = nivel;
     }
 
-    public void EdificioR(String nombre, RecursosAlquimistas recurso, int vida, int costo1, int costo2, int costo3,
+    public void EdificioR(String nombre, String recurso, int vida, int cantidad, int costo1, int costo2, int costo3,
                     int capacidad_recurso, int tiempo_espera, int produccion) {
         this.nombre = nombre;
         this.vida = vida;
@@ -49,15 +51,18 @@ public class Edificio {
         
         switch(nombre){
             case "Generador de Mana":
-                this.recurso1 = recurso;
+                this.mana = recurso;
+                this.cantidadMana = cantidad;
                 this.capacidad_recurso1 = capacidad_recurso;
                 break;
             case "Recolector de Elixir":
-                this.recurso2 = recurso;
+                this.elixir = recurso;
+                this.cantidadElixir = cantidad;
                 this.capacidad_recurso2 = capacidad_recurso;
                 break;
             case "Recolector de Cobalto":
-                this.recurso3 = recurso;
+                this.cobalto = recurso;
+                this.cantidadCobalto = cantidad;
                 this.capacidad_recurso3 = capacidad_recurso;
                 break;
         }
@@ -105,16 +110,28 @@ public class Edificio {
         this.nombre = nombre;
     }
 
-    public void setRecurso1(RecursosAlquimistas recurso1) {
-        this.recurso1 = recurso1;
+    public void setMana(String mana) {
+        this.mana = mana;
     }
 
-    public void setRecurso2(RecursosAlquimistas recurso2) {
-        this.recurso2 = recurso2;
+    public void setElixir(String elixir) {
+        this.elixir = elixir;
     }
 
-    public void setRecurso3(RecursosAlquimistas recurso3) {
-        this.recurso3 = recurso3;
+    public void setCobalto(String cobalto) {
+        this.cobalto = cobalto;
+    }
+
+    public void setCantidadMana(int cantidadMana) {
+        this.cantidadMana = cantidadMana;
+    }
+
+    public void setCantidadElixir(int cantidadElixir) {
+        this.cantidadElixir = cantidadElixir;
+    }
+
+    public void setCantidadCobalto(int cantidadCobalto) {
+        this.cantidadCobalto = cantidadCobalto;
     }
 
     public void setTropa1(TropasAlquimistas tropa1) {
@@ -193,18 +210,30 @@ public class Edificio {
         return nombre;
     }
 
-    public RecursosAlquimistas getRecurso1() {
-        return recurso1;
+    public String getMana() {
+        return mana;
     }
 
-    public RecursosAlquimistas getRecurso2() {
-        return recurso2;
+    public String getElixir() {
+        return elixir;
     }
 
-    public RecursosAlquimistas getRecurso3() {
-        return recurso3;
+    public String getCobalto() {
+        return cobalto;
     }
 
+    public int getCantidadMana() {
+        return cantidadMana;
+    }
+
+    public int getCantidadElixir() {
+        return cantidadElixir;
+    }
+
+    public int getCantidadCobalto() {
+        return cantidadCobalto;
+    }
+    
     public int getVida() {
         return vida;
     }

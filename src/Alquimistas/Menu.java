@@ -35,6 +35,7 @@ public class Menu {
         System.out.println("4. Atacar");
         System.out.println("5. Defender");
         System.out.println("6. Recolectar");
+        System.out.println("7. Terminar turno");
         System.out.println("-------------------");
     }
     
@@ -70,6 +71,8 @@ public class Menu {
                         return "Taller de Aerodeslizador";
                     case "8":
                         return "Taller de Espejos de Fuego";
+                    case "0":
+                        return "Volver";
                     default:
                         return null;
                 }
