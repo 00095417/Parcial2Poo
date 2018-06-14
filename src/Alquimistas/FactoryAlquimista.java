@@ -54,7 +54,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     public void setEdificioPrincipal(){
         edificioPrincipal = new Edificio();
         edificioPrincipal.EdificioP("Abadia","Mana","Elixir","Cobalto", 
-                                    500, 10000, 5000, 5000, 100, 100, 100, 10000, 5000, 5000, 1);
+                                    500, 2000, 1000, 1000, 100, 100, 100, 10000, 5000, 5000, 1);
     }
     //Creando los edificios que te generan recursos
     public void setEdificioRecurso(String recurso){
@@ -148,9 +148,10 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             System.out.println("No hay guarniciones");
         }
         else{
-            for (int i = 1; i <= listaEdificioGuarnicion.size(); i++)
+            int pos = 0;
+            for (Edificio g:listaEdificioGuarnicion)
             {
-                System.out.println((i) + ". " + listaEdificioGuarnicion.get(i-1).getNombre()); 
+                System.out.println((pos +=1) +". "+g.getNombre()); 
             }
         }
         if (listaEdificioTalleres.isEmpty())
@@ -158,9 +159,11 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             System.out.println("No hay talleres");
         }
         else{
+            int pos = 0;
             for (Edificio edificioT: listaEdificioTalleres)
             {
-                System.out.println(edificioT.getNombre());
+                pos += 1;
+                System.out.println(pos +". "+edificioT.getNombre());
             }
         }
         System.out.println("---------Tropas------------");
@@ -169,10 +172,9 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             System.out.println("No hay guarniciones");
         }
         else{
-            for (int i = 1; i <= listaEdificioGuarnicion.size(); i++)
+            for (Edificio g:listaEdificioGuarnicion)
             {
-                System.out.println(listaEdificioGuarnicion.get(i-1).getTropa().getNombreTropa() + " "+ 
-                                   listaEdificioGuarnicion.get(i-1).getTropa().getCantidad()); 
+                System.out.println(g.getTropa().getNombreTropa() +" "+ g.getTropa().getCantidad()); 
             }
         }
     
@@ -194,6 +196,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()-edificioRecurso.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()-edificioRecurso.getCosto3());
                             listaEdificioRecurso.add(edificioRecurso);
+                            edificioRecurso = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -207,6 +210,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()-edificioRecurso.getCosto1());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()-edificioRecurso.getCosto3());
                             listaEdificioRecurso.add(edificioRecurso);
+                            edificioRecurso = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -220,6 +224,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()-edificioRecurso.getCosto1());
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()-edificioRecurso.getCosto2());
                             listaEdificioRecurso.add(edificioRecurso);
+                            edificioRecurso = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -235,6 +240,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
                             listaEdificioGuarnicion.add(edificioTropas);
+                            edificioTropas = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -250,6 +256,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
                             listaEdificioGuarnicion.add(edificioTropas);
+                            edificioTropas = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -265,6 +272,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
                             listaEdificioGuarnicion.add(edificioTropas);
+                            edificioTropas = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -280,6 +288,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioVehiculo.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioVehiculo.getCosto3());
                             listaEdificioTalleres.add(edificioVehiculo);
+                            edificioVehiculo = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
@@ -295,6 +304,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioVehiculo.getCosto2());
                             edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioVehiculo.getCosto3());
                             listaEdificioGuarnicion.add(edificioVehiculo);
+                            edificioVehiculo = new Edificio();
                         }
                         else{
                             System.out.println("Recurso Insuficiente");
