@@ -12,10 +12,10 @@ package Alquimistas;
 public class TropasAlquimistas {
     
     private String nombreTropa;
-    private int vida, daAtaque, daDefensa, costoR1, costoR2, costoR3;
+    private int vida, daAtaque, daDefensa, costoR1, costoR2, costoR3, cantidad;
 
     public void TropasAlquimistas(String nombreTropa, int vida, int daAtaque, 
-                             int daDefensa,int costoR1, int costoR2, int costoR3) {
+                             int daDefensa,int costoR1, int costoR2, int costoR3, int cantidad){
         this.nombreTropa = nombreTropa;
         this.vida = vida;
         this.daAtaque = daAtaque;
@@ -23,6 +23,7 @@ public class TropasAlquimistas {
         this.costoR1 = costoR1;
         this.costoR2 = costoR2;
         this.costoR3 = costoR3;
+        this.cantidad = cantidad;
     }
     
     public String getNombreTropa() {
@@ -80,5 +81,12 @@ public class TropasAlquimistas {
     public void setCostoR3(int costoR3) {
         this.costoR3 = costoR3;
     }
-    
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }

@@ -13,8 +13,8 @@ package Alquimistas;
 public class Edificio {
     
     private String nombre, mana,elixir,cobalto;
-    private TropasAlquimistas tropa1, tropa2;
-    private VehiculosAlquimistas vehiculo1, vehiculo2;
+    private TropasAlquimistas tropa;
+    private VehiculosAlquimistas vehiculo;
     private int vida, cantidadMana, cantidadElixir, cantidadCobalto, costo1, costo2, costo3, 
                 capacidad_recurso1, capacidad_recurso2,capacidad_recurso3, tiempo_espera, produccion, nivel;
 
@@ -76,15 +76,7 @@ public class Edificio {
         this.costo2 = costo2;
         this.costo3 = costo3;
         this.produccion = produccion;
-        
-        switch (nombre){
-            case "Guarnicion de Gremios":
-                this.tropa1 = tropa;
-                break;
-            case "Guarnicion de Magos":
-                this.tropa2 = tropa;
-                break;
-        }
+        this.tropa = tropa;
     }
     
     public void EdificioV(String nombre, VehiculosAlquimistas vehiculo, int vida, 
@@ -95,15 +87,7 @@ public class Edificio {
         this.costo2 = costo2;
         this.costo3 = costo3;
         this.produccion = produccion;
-        
-        switch (nombre){
-            case "Taller de Aerodeslizadores":
-                this.vehiculo1 = vehiculo;
-                break;
-            case "Taller de Espejos de Fuego":
-                this.vehiculo2 = vehiculo;
-                break;
-        }
+        this.vehiculo = vehiculo;
     }
     
     public void setNombre(String nombre) {
@@ -134,20 +118,12 @@ public class Edificio {
         this.cantidadCobalto = cantidadCobalto;
     }
 
-    public void setTropa1(TropasAlquimistas tropa1) {
-        this.tropa1 = tropa1;
+    public void setTropa(TropasAlquimistas tropa) {
+        this.tropa = tropa;
     }
 
-    public void setTropa2(TropasAlquimistas tropa2) {
-        this.tropa2 = tropa2;
-    }
-
-    public void setVehiculo1(VehiculosAlquimistas vehiculo1) {
-        this.vehiculo1 = vehiculo1;
-    }
-
-    public void setVehiculo2(VehiculosAlquimistas vehiculo2) {
-        this.vehiculo2 = vehiculo2;
+    public void setVehiculo(VehiculosAlquimistas vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     public void setVida(int vida) {
@@ -190,20 +166,12 @@ public class Edificio {
         this.nivel = nivel;
     }
     
-    public TropasAlquimistas getTropa1() {
-        return tropa1;
+    public TropasAlquimistas getTropa() {
+        return tropa;
     }
 
-    public TropasAlquimistas getTropa2() {
-        return tropa2;
-    }
-
-    public VehiculosAlquimistas getVehiculo1() {
-        return vehiculo1;
-    }
-
-    public VehiculosAlquimistas getVehiculo2() {
-        return vehiculo2;
+    public VehiculosAlquimistas getVehiculo() {
+        return vehiculo;
     }  
     
     public String getNombre() {

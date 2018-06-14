@@ -83,15 +83,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         switch(guarnicio)
         {
             case "gremio":
-                tropa.TropasAlquimistas("Gremio", 100, 35, 25, 10, 10, 5);
+                tropa.TropasAlquimistas("Gremio", 100, 35, 25, 10, 10, 5,0);
                 edificioTropas.EdificioT("Guarnicion de Gremios", tropa, 150, 75, 75, 75, 2);
                 break;
             case "magos":
-                tropa.TropasAlquimistas("Magos", 10, 7, 6, 5, 5, 0);
+                tropa.TropasAlquimistas("Magos", 10, 7, 6, 5, 5, 0,0);
                 edificioTropas.EdificioT("Guarnicion de Magos", tropa, 100, 50, 50, 50, 5);
                 break;
             case "especial":
-                tropa.TropasAlquimistas("Chaman", 100, 50, 50, 50, 50, 1);
+                tropa.TropasAlquimistas("Chaman", 100, 50, 50, 0, 50, 50,0);
                 edificioTropas.EdificioT("Guarnicion Especial", tropa, 100, 75, 75, 75, 1);
                 break;
         }
@@ -148,9 +148,9 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             System.out.println("No hay guarniciones");
         }
         else{
-            for (Edificio edificioG: listaEdificioGuarnicion)
+            for (int i = 1; i <= listaEdificioGuarnicion.size(); i++)
             {
-                System.out.println(edificioG.getNombre());
+                System.out.println((i) + ". " + listaEdificioGuarnicion.get(i-1).getNombre()); 
             }
         }
         if (listaEdificioTalleres.isEmpty())
@@ -164,6 +164,17 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             }
         }
         System.out.println("---------Tropas------------");
+        if (listaEdificioGuarnicion.isEmpty())
+        {
+            System.out.println("No hay guarniciones");
+        }
+        else{
+            for (int i = 1; i <= listaEdificioGuarnicion.size(); i++)
+            {
+                System.out.println(listaEdificioGuarnicion.get(i-1).getTropa().getNombreTropa() + " "+ 
+                                   listaEdificioGuarnicion.get(i-1).getTropa().getCantidad()); 
+            }
+        }
     
     }
     //Mostrando las acciones que el jugador puede realizar atravez de una secuencia de menús
@@ -297,9 +308,41 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                 break;
             //Menú que te muestra las tropas a crear y las condiciones para hacerlo
             case "2":
-                menuAlquimista.menuTropas();
+                switch(menuAlquimista.menuTropas())
+                {
+                    case "Gremio":
+                        if (listaEdificioGuarnicion.isEmpty())
+                        {
+                        System.out.println("Cree una Guarnicion de Gremios primero para utilizar esta tropa.");
+                        }
+                        else{
+                            System.out.println("Elija que guarnicion usar:");
+                            int index = entrada.nextInt();
+                            TropasAlquimistas tropaAux = listaEdificioGuarnicion.get(index-1).getTropa();
+                            System.out.println("Cantidad a adiestrar (max 5):");
+                            int cantidad = entrada.nextInt();
+                            if (edificioPrincipal.getCantidadMana()>(tropaAux.getCostoR1()*cantidad)&&
+                                edificioPrincipal.getCantidadElixir()>(tropaAux.getCostoR2()*cantidad)&&
+                                edificioPrincipal.getCantidadCobalto()>(tropaAux.getCostoR3()*cantidad)&& cantidad>=0 && cantidad<=5)
+                            {
+                                edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- tropaAux.getCostoR1()*cantidad);
+                                edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- tropaAux.getCostoR2()*cantidad);
+                                edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- tropaAux.getCostoR3()*cantidad);
+                                
+                                listaEdificioGuarnicion.get(index-1).getTropa().setCantidad(cantidad);
+                            }
+                            else
+                            {
+                                System.out.println("Opcion invalida");                            
+                            }
+                            break;
+                        }
+                
+                }
                 break;
         
         }
+        
+        getAlquimista();
     }
 }
