@@ -67,7 +67,32 @@ public class Player {
             case "Heroico":
                 System.out.println(getRazaE() + " menu");
                 break;
-        
         }
+    }
+    
+    public int getVidaEdificioPrincipal(){
+        
+        switch(getRazaE()){
+            case "Alquimista":
+                return raza.getFactory("1").getVidaEdificioPrincipal();
+            case "Creacionista":
+                return 0;
+            case "Heroico":
+                return 0;
+        }
+        return 0;
+    }
+    
+    public void setFasejuego(){
+        
+        switch(getRazaE()){
+            case "Alquimista":
+                raza.getFactory("1").setFase(this.fase);
+                break;
+            case "Creacionista":
+                break;
+            case "Heroico":
+                break;
+        } 
     }
 }

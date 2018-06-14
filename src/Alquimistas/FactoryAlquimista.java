@@ -25,6 +25,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     private ArrayList<Edificio> listaEdificioRecurso = new ArrayList<>();
     private ArrayList<Edificio> listaEdificioGuarnicion = new ArrayList<>();
     private ArrayList<Edificio> listaEdificioTalleres = new ArrayList<>();
+    private int fase;
     private boolean continuar = true;
     Scanner entrada = new Scanner(System.in);
     
@@ -35,7 +36,6 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             setEdificioPrincipal();
         }
         menus();
-        
     }
 
     @Override
@@ -47,6 +47,16 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     public Creacionista getCreacionista(String type) {
         return null;
     }
+
+    @Override
+    public int getVidaEdificioPrincipal() {
+        return edificioPrincipal.getVida();
+    }
+
+    @Override
+    public void setFase(int fase) {
+        this.fase = fase;
+    }
     
     //Creando el Centro de Mando
     public void setEdificioPrincipal(){
@@ -54,6 +64,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         edificioPrincipal.EdificioP("Abadia","Mana","Elixir","Cobalto", 
                                     500, 2000, 1000, 1000, 100, 100, 100, 10000, 5000, 5000, 1);
     }
+    
     //Creando los edificios que te generan recursos
     public void setEdificioRecurso(String recurso){
         
@@ -188,7 +199,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     }
     //Mostrando las acciones que el jugador puede realizar atravez de una secuencia de menús
     public void menus(){
-        
+        continuar = true;
         while(continuar)
         {
             mostrarRaza();

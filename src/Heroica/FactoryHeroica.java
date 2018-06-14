@@ -27,6 +27,16 @@ public class FactoryHeroica implements AbstracFactoryRazas{
     public Creacionista getCreacionista(String type) {
         return null;
     }
+
+    @Override
+    public int getVidaEdificioPrincipal() {
+        return 0;
+    }
+
+    @Override
+    public void setFase(int fase) {
+        
+    }
     
     
     

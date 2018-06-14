@@ -27,6 +27,16 @@ public class FactoryCreacionista implements AbstracFactoryRazas{
     public Creacionista getCreacionista(String type) {
         return new RazaElegida();
     }
+
+    @Override
+    public int getVidaEdificioPrincipal() {
+        return 0;
+    }
+
+    @Override
+    public void setFase(int fase) {
+        
+    }
     
     
     

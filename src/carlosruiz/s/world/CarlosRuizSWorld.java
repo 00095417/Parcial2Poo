@@ -6,6 +6,7 @@
 package carlosruiz.s.world;
 
 import Player.Player;
+import java.util.ArrayList;
 /**
  *
  * @author Carlos Ruiz
@@ -19,15 +20,20 @@ public class CarlosRuizSWorld {
         
         int numFase = 0;
         Player player1 = new Player();
+        boolean paro = true;
         
         player1.setFase(0);
-        
         player1.eleccionRaza();
-            
-        player1.jugar();
-            
-        player1.setFase(numFase+=1);
-            
-        System.out.println("------Fin fase " + numFase + "------");
-    }   
+        
+        do{
+            player1.jugar();
+            player1.setFase(numFase+=1);
+            System.out.println("------Fin fase " + numFase + "------");
+            if (numFase==5){
+                paro = false;
+            }
+        }
+        while(player1.getVidaEdificioPrincipal()>0&& paro);        
+    }
+    
 }
