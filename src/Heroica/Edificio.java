@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Creacionista;
+package Heroica;
 
 /**
  *
  * @author Carlos Ruiz
  */
 public class Edificio {
+    
     private String nombre, granito,ether,carbono;
-    private TropasCreacionista tropa;
-    private VehiculosCreacionista vehiculo;
+    private TropasHeroicas tropa;
+    private VehiculosHeroicos vehiculo;
     private int vida, cantidadGranito, cantidadEther, cantidadCarbono, costo1, costo2, costo3, 
                 capacidad_recurso1, capacidad_recurso2,capacidad_recurso3, tiempo_espera, faseCreacion, produccion, nivel;
 
@@ -67,7 +68,7 @@ public class Edificio {
         }
     }
 
-    public void EdificioT(String nombre, TropasCreacionista tropa, int vida, 
+    public void EdificioT(String nombre, TropasHeroicas tropa, int vida, 
                     int costo1, int costo2, int costo3, int produccion, int faseCreacion, int tiempo_espera) {
         this.nombre = nombre;
         this.vida = vida;
@@ -80,7 +81,7 @@ public class Edificio {
         this.tiempo_espera = tiempo_espera;
     }
     
-    public void EdificioV(String nombre, VehiculosCreacionista vehiculo, int vida, 
+    public void EdificioV(String nombre, VehiculosHeroicos vehiculo, int vida, 
                     int costo1, int costo2, int costo3, int produccion, int faseCreacion, int tiempo_espera) {
         this.nombre = nombre;
         this.vida = vida;
@@ -125,19 +126,19 @@ public class Edificio {
         this.carbono = carbono;
     }
 
-    public TropasCreacionista getTropa() {
+    public TropasHeroicas getTropa() {
         return tropa;
     }
 
-    public void setTropa(TropasCreacionista tropa) {
+    public void setTropa(TropasHeroicas tropa) {
         this.tropa = tropa;
     }
 
-    public VehiculosCreacionista getVehiculo() {
+    public VehiculosHeroicos getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(VehiculosCreacionista vehiculo) {
+    public void setVehiculo(VehiculosHeroicos vehiculo) {
         this.vehiculo = vehiculo;
     }
 
