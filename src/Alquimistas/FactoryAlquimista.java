@@ -5,10 +5,9 @@
  */
 package Alquimistas;
 
-import Creacionista.Creacionista;
 import Factory.AbstracFactoryRazas;
-import Heroica.Heroica;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -22,9 +21,11 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
     private Edificio edificioRecurso = new Edificio();
     private Edificio edificioTropas = new Edificio();
     private Edificio edificioVehiculo = new Edificio();
+    private Edificio aux = new Edificio();
     private ArrayList<Edificio> listaEdificioRecurso = new ArrayList<>();
     private ArrayList<Edificio> listaEdificioGuarnicion = new ArrayList<>();
     private ArrayList<Edificio> listaEdificioTalleres = new ArrayList<>();
+    private ArrayList<Edificio> edificiosEnEspera = new ArrayList<>();
     private int fase;
     private boolean continuar = true;
     Scanner entrada = new Scanner(System.in);
@@ -35,18 +36,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         {
             setEdificioPrincipal();
         }
+        System.out.println("Fase actual: " + this.fase);
         menus();
     }
 
     @Override
-    public Heroica getHeroica(String type) {
-        return null;
-    }
+    public void getHeroica() {}
 
     @Override
-    public Creacionista getCreacionista(String type) {
-        return null;
-    }
+    public void getCreacionista() {}
 
     @Override
     public int getVidaEdificioPrincipal() {
@@ -64,7 +62,6 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         edificioPrincipal.EdificioP("Abadia","Mana","Elixir","Cobalto", 
                                     500, 2000, 1000, 1000, 100, 100, 100, 10000, 5000, 5000, 1);
     }
-    
     //Creando los edificios que te generan recursos
     public void setEdificioRecurso(String recurso){
         
@@ -72,15 +69,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         {
             
             case "mana":
-                edificioRecurso.EdificioR("Generador de Mana", "Mana", 1000, 0, 0, 50, 50, 500, 3, 100);
+                edificioRecurso.EdificioR("Generador de Mana", "Mana", 1000, 0, 0, 50, 50, 500, 3, 100, this.fase);
                 break;
                 
             case "elixir":
-                edificioRecurso.EdificioR("Recolector de Elixir", "Elixir", 1000, 0, 50, 0, 50, 500, 3, 100);
+                edificioRecurso.EdificioR("Recolector de Elixir", "Elixir", 1000, 0, 50, 0, 50, 500, 3, 100, this.fase);
                 break;
                 
             case "cobalto":
-                edificioRecurso.EdificioR("Recolector de Cobalto", "Cobalto", 1000, 0, 50, 50, 0, 500, 3, 100);
+                edificioRecurso.EdificioR("Recolector de Cobalto", "Cobalto", 1000, 0, 50, 50, 0, 500, 3, 100, this.fase);
                 break;                      
         }
     }
@@ -93,15 +90,15 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         {
             case "gremio":
                 tropa.TropasAlquimistas("Gremio", 100, 35, 25, 10, 10, 5,0);
-                edificioTropas.EdificioT("Guarnicion de Gremios", tropa, 150, 75, 75, 75, 2);
+                edificioTropas.EdificioT("Guarnicion de Gremios", tropa, 150, 75, 75, 75, 2, this.fase,4);
                 break;
             case "magos":
                 tropa.TropasAlquimistas("Magos", 10, 7, 6, 5, 5, 0,0);
-                edificioTropas.EdificioT("Guarnicion de Magos", tropa, 100, 50, 50, 50, 5);
+                edificioTropas.EdificioT("Guarnicion de Magos", tropa, 100, 50, 50, 50, 5, this.fase,4);
                 break;
             case "especial":
                 tropa.TropasAlquimistas("Chaman", 100, 50, 50, 0, 50, 50,0);
-                edificioTropas.EdificioT("Guarnicion Especial", tropa, 100, 75, 75, 75, 1);
+                edificioTropas.EdificioT("Guarnicion Especial", tropa, 100, 75, 75, 75, 1, this.fase, 4);
                 break;
         }
     }
@@ -114,22 +111,23 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
         {
             case "aerodeslizador":
                 vehiculo.VehiculosAlquimistas("Aerodeslizador", 100, 30, 0, 25, 25,0);
-                edificioVehiculo.EdificioV("Taller de Aerodeslizadores", vehiculo, 100, 100, 100, 100, 1);
+                edificioVehiculo.EdificioV("Taller de Aerodeslizadores", vehiculo, 100, 100, 100, 100, 1, this.fase, 4);
                 break;
             case "espejo de fuego":
                 vehiculo.VehiculosAlquimistas("Espejo de Fuego", 100, 30, 0, 25, 25,0);
-                edificioVehiculo.EdificioV("Taller de Espejos de Fuego", vehiculo, 100, 100, 100, 100, 1);
+                edificioVehiculo.EdificioV("Taller de Espejos de Fuego", vehiculo, 100, 100, 100, 100, 1, this.fase, 4);
                 break;
         }
     }
     //Mostrando los elementos que posee la raza alquimista
     public void mostrarRaza(){
-    
+              
         System.out.println("------Raza Alquimista------");
         System.out.println("---------Recursos----------");
         System.out.println(edificioPrincipal.getMana() + ": " + edificioPrincipal.getCantidadMana());
         System.out.println(edificioPrincipal.getElixir() + ": " + edificioPrincipal.getCantidadElixir());
         System.out.println(edificioPrincipal.getCobalto() + ": " + edificioPrincipal.getCantidadCobalto());
+        
         System.out.println("---------Edificios---------");
         if (listaEdificioRecurso.isEmpty())
         {
@@ -140,7 +138,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
             {
                 if("Generador de Mana".equals(edificioR.getNombre()))
                 {
-                    System.out.println(edificioR.getNombre() + ":" + edificioR.getCantidadMana());
+                    System.out.println(edificioR.getNombre() + ":" + edificioR.getProduccion()*(this.fase-edificioR.getFaseCreacion()));
                 }
                 if("Recolector de Elixir".equals(edificioR.getNombre()))
                 {
@@ -174,6 +172,71 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                 System.out.println((pos += 1) +". "+edificioT.getNombre());
             }
         }
+        
+        System.out.println("----Edificios en espera----");
+        
+        if (edificiosEnEspera.isEmpty())
+        {
+            System.out.println("No tienes edificios en espera para usar");
+        }
+        else
+        {
+            Iterator<Edificio> e = edificiosEnEspera.iterator();
+            
+            while(e.hasNext())
+            {
+                aux = e.next();
+                if((aux.getFaseCreacion()+aux.getTiempo_espera())==this.fase)
+                {
+                    if ("Generador de Mana".equals(aux.getNombre()))
+                    {
+                        listaEdificioRecurso.add(aux);
+                        e.remove();
+                    }
+                    if ("Recolector de Elixir".equals(aux.getNombre()))
+                    {
+                        listaEdificioRecurso.add(aux);
+                        e.remove();
+                    }
+                    if ("Recolector de Cobalto".equals(aux.getNombre()))
+                    {
+                        listaEdificioRecurso.add(aux);
+                        e.remove();
+                    }
+                    if ("Guarnicion de Gremios".equals(aux.getNombre()))
+                    {
+                        listaEdificioGuarnicion.add(aux);
+                        e.remove();
+                    }
+                    if ("Guarnicion de Magos".equals(aux.getNombre()))
+                    {
+                        listaEdificioGuarnicion.add(aux);
+                        e.remove();
+                    }
+                    if ("Guarnicion Especial".equals(aux.getNombre()))
+                    {
+                        listaEdificioGuarnicion.add(aux);
+                        e.remove();
+                    }
+                    if ("Taller de Aerodeslizador".equals(aux.getNombre()))
+                    {
+                        listaEdificioTalleres.add(aux);
+                        e.remove();
+                    }
+                    if ("Taller de Espejos de fuego".equals(aux.getNombre()))
+                    {
+                        listaEdificioTalleres.add(aux);
+                        e.remove();
+                    }
+                }
+                else
+                {   
+                    System.out.println(aux.getNombre()+", tiempo de espera "+aux.getTiempo_espera()
+                                        +" fases"+", fase de creacion "+aux.getFaseCreacion()+", fase actual "+this.fase);
+                }
+            }
+        }
+        
         System.out.println("---------Tropas------------");
         if (listaEdificioGuarnicion.isEmpty())
         {
@@ -218,7 +281,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             {    
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()-edificioRecurso.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()-edificioRecurso.getCosto3());
-                                listaEdificioRecurso.add(edificioRecurso);
+                                edificiosEnEspera.add(edificioRecurso);
                                 edificioRecurso = new Edificio();
                             }
                             else{
@@ -232,7 +295,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()-edificioRecurso.getCosto1());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()-edificioRecurso.getCosto3());
-                                listaEdificioRecurso.add(edificioRecurso);
+                                edificiosEnEspera.add(edificioRecurso);
                                 edificioRecurso = new Edificio();
                             }
                             else{
@@ -246,7 +309,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()-edificioRecurso.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()-edificioRecurso.getCosto2());
-                                listaEdificioRecurso.add(edificioRecurso);
+                                edificiosEnEspera.add(edificioRecurso);
                                 edificioRecurso = new Edificio();
                             }
                             else{
@@ -262,7 +325,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- edificioTropas.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
-                                listaEdificioGuarnicion.add(edificioTropas);
+                                edificiosEnEspera.add(edificioTropas);
                                 edificioTropas = new Edificio();
                             }
                             else{
@@ -278,7 +341,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- edificioTropas.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
-                                listaEdificioGuarnicion.add(edificioTropas);
+                                edificiosEnEspera.add(edificioTropas);
                                 edificioTropas = new Edificio();
                             }
                             else{
@@ -286,9 +349,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                             }
                             break;
                         case "Guarnicion Especial":
-                            System.out.println("menu tropas 2");
                              setEdificioTropa("especial");
-                             System.out.println("menu tropas 3");
                             if (edificioPrincipal.getCantidadMana()>edificioTropas.getCosto1()&&
                                 edificioPrincipal.getCantidadElixir()>edificioTropas.getCosto2()&&
                                 edificioPrincipal.getCantidadCobalto()>edificioTropas.getCosto3())
@@ -296,7 +357,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- edificioTropas.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioTropas.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioTropas.getCosto3());
-                                listaEdificioGuarnicion.add(edificioTropas);
+                                edificiosEnEspera.add(edificioTropas);
                                 edificioTropas = new Edificio();
                             }
                             else{
@@ -312,7 +373,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- edificioVehiculo.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioVehiculo.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioVehiculo.getCosto3());
-                                listaEdificioTalleres.add(edificioVehiculo);
+                                edificiosEnEspera.add(edificioVehiculo);
                                 edificioVehiculo = new Edificio();
                             }
                             else{
@@ -328,7 +389,7 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                                 edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()- edificioVehiculo.getCosto1());
                                 edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()- edificioVehiculo.getCosto2());
                                 edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()- edificioVehiculo.getCosto3());
-                                listaEdificioTalleres.add(edificioVehiculo);
+                                edificiosEnEspera.add(edificioVehiculo);
                                 edificioVehiculo = new Edificio();
                             }
                             else{
@@ -532,14 +593,23 @@ public class FactoryAlquimista implements AbstracFactoryRazas {
                     else
                     {
                         for (Edificio recolectar:listaEdificioRecurso){
-                            if ("Generador de Mana".equals(recolectar.getNombre())){
-                                edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()+recolectar.getCantidadMana());
+                            if ("Generador de Mana".equals(recolectar.getNombre()))
+                            {
+                                edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadMana()
+                                                                  +recolectar.getProduccion()*(this.fase-recolectar.getFaseCreacion()));
+                                recolectar.setFaseCreacion(this.fase);   
                             }
-                            if ("Recolector de Elixir".equals(recolectar.getNombre())){
-                                edificioPrincipal.setCantidadMana(edificioPrincipal.getCantidadElixir()+recolectar.getCantidadElixir());
+                            if ("Recolector de Elixir".equals(recolectar.getNombre()))
+                            {
+                                edificioPrincipal.setCantidadElixir(edificioPrincipal.getCantidadElixir()
+                                                                    +recolectar.getProduccion()*(this.fase-recolectar.getFaseCreacion()));
+                                recolectar.setFaseCreacion(this.fase);
                             }
-                            if ("Recolector de Cobalto".equals(recolectar.getNombre())){
-                                edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()+recolectar.getCantidadCobalto());
+                            if ("Recolector de Cobalto".equals(recolectar.getNombre()))
+                            {
+                                edificioPrincipal.setCantidadCobalto(edificioPrincipal.getCantidadCobalto()
+                                        +recolectar.getProduccion()*(this.fase-recolectar.getFaseCreacion()));
+                                recolectar.setFaseCreacion(this.fase);
                             }
                         }
                     }

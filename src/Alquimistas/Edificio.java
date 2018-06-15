@@ -16,7 +16,7 @@ public class Edificio {
     private TropasAlquimistas tropa;
     private VehiculosAlquimistas vehiculo;
     private int vida, cantidadMana, cantidadElixir, cantidadCobalto, costo1, costo2, costo3, 
-                capacidad_recurso1, capacidad_recurso2,capacidad_recurso3, tiempo_espera, produccion, nivel;
+                capacidad_recurso1, capacidad_recurso2,capacidad_recurso3, tiempo_espera, faseCreacion, produccion, nivel;
 
     public void  EdificioP(String nombre, String mana, String elixir, String cobalto, int vida,
                             int cantidadMana, int cantidadElixir, int cantidadCobalto, 
@@ -40,7 +40,7 @@ public class Edificio {
     }
 
     public void EdificioR(String nombre, String recurso, int vida, int cantidad, int costo1, int costo2, int costo3,
-                    int capacidad_recurso, int tiempo_espera, int produccion) {
+                    int capacidad_recurso, int tiempo_espera, int produccion, int faseCreacion) {
         this.nombre = nombre;
         this.vida = vida;
         this.costo1 = costo1;
@@ -48,6 +48,7 @@ public class Edificio {
         this.costo3 = costo3;
         this.tiempo_espera = tiempo_espera;
         this.produccion = produccion;
+        this.faseCreacion = faseCreacion;
         
         switch(nombre){
             case "Generador de Mana":
@@ -69,7 +70,7 @@ public class Edificio {
     }
 
     public void EdificioT(String nombre, TropasAlquimistas tropa, int vida, 
-                    int costo1, int costo2, int costo3, int produccion) {
+                    int costo1, int costo2, int costo3, int produccion, int faseCreacion, int tiempo_espera) {
         this.nombre = nombre;
         this.vida = vida;
         this.costo1 = costo1;
@@ -77,10 +78,12 @@ public class Edificio {
         this.costo3 = costo3;
         this.produccion = produccion;
         this.tropa = tropa;
+        this.faseCreacion = faseCreacion;
+        this.tiempo_espera = tiempo_espera;
     }
     
     public void EdificioV(String nombre, VehiculosAlquimistas vehiculo, int vida, 
-                    int costo1, int costo2, int costo3, int produccion) {
+                    int costo1, int costo2, int costo3, int produccion, int faseCreacion, int tiempo_espera) {
         this.nombre = nombre;
         this.vida = vida;
         this.costo1 = costo1;
@@ -88,6 +91,8 @@ public class Edificio {
         this.costo3 = costo3;
         this.produccion = produccion;
         this.vehiculo = vehiculo;
+        this.faseCreacion = faseCreacion;
+        this.tiempo_espera = tiempo_espera;
     }
     
     public void setNombre(String nombre) {
@@ -221,6 +226,15 @@ public class Edificio {
     public int getTiempo_espera() {
         return tiempo_espera;
     }
+
+    public int getFaseCreacion() {
+        return faseCreacion;
+    }
+
+    public void setFaseCreacion(int faseCreacion) {
+        this.faseCreacion = faseCreacion;
+    }
+    
 
     public int getProduccion() {
         return produccion;

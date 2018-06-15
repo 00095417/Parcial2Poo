@@ -62,10 +62,10 @@ public class Player {
                 raza.getFactory("1").getAlquimista();
                 break;
             case "Creacionista":
-                System.out.println(getRazaE() + " menu");
+                raza.getFactory("2").getCreacionista();
                 break;
             case "Heroico":
-                System.out.println(getRazaE() + " menu");
+                raza.getFactory("3").getHeroica();
                 break;
         }
     }
@@ -76,9 +76,9 @@ public class Player {
             case "Alquimista":
                 return raza.getFactory("1").getVidaEdificioPrincipal();
             case "Creacionista":
-                return 0;
+                return raza.getFactory("2").getVidaEdificioPrincipal();
             case "Heroico":
-                return 0;
+                return raza.getFactory("3").getVidaEdificioPrincipal();
         }
         return 0;
     }
@@ -90,8 +90,10 @@ public class Player {
                 raza.getFactory("1").setFase(this.fase);
                 break;
             case "Creacionista":
+                raza.getFactory("2").setFase(this.fase);
                 break;
             case "Heroico":
+                raza.getFactory("3").setFase(this.fase);
                 break;
         } 
     }

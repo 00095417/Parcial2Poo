@@ -17,8 +17,8 @@ public interface AbstracFactoryRazas {
     void getAlquimista();
     int getVidaEdificioPrincipal();
     void setFase(int fase);
-    Heroica getHeroica(String type);
-    Creacionista getCreacionista(String type);
+    void getHeroica();
+    void getCreacionista();
     
     
 }
